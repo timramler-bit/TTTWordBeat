@@ -259,21 +259,18 @@ export default function App() {
   }
 
   // Responsive Grid Class Logic
-  // Mobile (>6 items): grid-cols-2 (2 columns, 4 rows)
-  // Default (<=4): grid-cols-2.
-  // 5-6: grid-cols-2 md:grid-cols-3.
+  // Mobile:
+  // <= 4 items: 2 columns
+  // 5-6 items: 2 columns (3 rows max) - Fits okay
+  // 7-8 items: 3 columns (3 rows max) - Fits better than 2 columns (4 rows)
   const getGridColsClass = () => {
     const n = gridItems.length;
-    if (n <= 4) return 'grid-cols-2';
     if (n <= 6) return 'grid-cols-2 md:grid-cols-3';
-    // For 7-8 items:
-    // Mobile: grid-cols-2 (2 columns = 4 rows)
-    // Desktop: grid-cols-4 (4 columns = 2 rows)
-    return 'grid-cols-2 md:grid-cols-4';
+    return 'grid-cols-3 md:grid-cols-4';
   };
 
   return (
-    <div className={`flex flex-col h-screen text-slate-100 overflow-hidden font-inter transition-colors ease-in-out ${bgColorClass}`}>
+    <div className={`flex flex-col h-[100dvh] text-slate-100 overflow-hidden font-inter transition-colors ease-in-out ${bgColorClass}`}>
       
       {/* Top Bar */}
       <header className={`flex-none backdrop-blur-md border-b border-slate-800 z-30 shadow-xl p-2 px-4 transition-colors duration-700 ${isPlaying && !schedulerState.isIntermission ? 'bg-black/20' : 'bg-slate-900/90'}`}>
